@@ -69,5 +69,18 @@ namespace ChinookAPI_Dapper.DataAccess
                 return (int)result;
             }
         }
+
+        public bool AddNewInvoice(Invoice invoice)
+        {
+
+            using (var dbConnection = new SqlConnection(ConnectionString))
+            {
+                dbConnection.Open();
+                var result = dbConnection.Execute(@"INSERT INTO 
+                                            Invoice (CustomerId,InvoiceDate,BillingAddress,BillingCity,BillingState,BillingCountry,BillingPostalCode,Total)
+                                        VALUES (@CustomerId,@InvoiceDate,@BillingAddress,@BillingCity,@BillingState,@BillingCountry,@BillingPostalCode,@Total)", invoice);
+                return result == 1;
+            }
+        }
     }
 }
