@@ -82,5 +82,19 @@ namespace ChinookAPI_Dapper.DataAccess
                 return result == 1;
             }
         }
+
+        public bool UpdateEmployeeName(int id, Employee employee)
+        {
+            employee.Id = id;
+            using (var dbConnection = new SqlConnection(ConnectionString))
+            {
+                dbConnection.Open();
+                var result = dbConnection.Execute(@"UPDATE Employee
+                                        SET LastName = @LastName, FirstName = @FirstName
+                                        WHERE EmployeeId = @id", employee);
+
+                return result == 1;
+            }
+        }
     }
 }

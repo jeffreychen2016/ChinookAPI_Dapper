@@ -44,5 +44,11 @@ namespace ChinookAPI_Dapper.Controllers
         {
             return Ok(_chinook.AddNewInvoice(invoice));
         }
+
+        [HttpPut("UpdateEmployeeName/{id}")]
+        public IActionResult UpdateEmployeeName(int id, Employee employee)
+        {
+            return Ok(_chinook.UpdateEmployeeName(id, employee));
+        }
     }
 }
