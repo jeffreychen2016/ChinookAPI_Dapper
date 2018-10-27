@@ -19,5 +19,11 @@ namespace ChinookAPI_Dapper.Controllers
         {
             _chinook = new Chinook(config);
         }
+
+        [HttpGet("GetInvoicesBySalesAgentID/{id}")]
+        public IActionResult GetInvoicesBySalesAgentID(int id)
+        {
+            return Ok(_chinook.GetInvoicesBySalesAgentID(id));
+        }
     }
 }
