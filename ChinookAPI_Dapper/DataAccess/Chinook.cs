@@ -35,5 +35,25 @@ namespace ChinookAPI_Dapper.DataAccess
                 return result.ToList();
             };
         }
+
+        public List<Invoice> GetAllInvoices()
+        {
+            using (var dbConnection = new SqlConnection(ConnectionString))
+            {
+                dbConnection.Open();
+                var result = dbConnection.Query<Invoice>(@"SELECT 
+                                            Invoice.Total
+	                                        ,CustomerName = Customer.FirstName + ' ' + Customer.LastName
+	                                        ,Invoice.BillingCountry
+	                                        ,SaleAgent = Employee.FirstName + ' ' + Employee.LastName
+                                        FROM Invoice
+                                        INNER JOIN Customer
+                                            ON Invoice.CustomerId = Customer.CustomerId
+                                        INNER JOIN Employee
+                                            ON Customer.SupportRepId = Employee.EmployeeId");
+
+                return result.ToList();
+            };
+        }
     }
 }
