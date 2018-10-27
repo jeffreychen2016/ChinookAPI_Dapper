@@ -31,5 +31,11 @@ namespace ChinookAPI_Dapper.Controllers
         {
             return Ok(_chinook.GetAllInvoices());
         }
+
+        [HttpGet("GetCountOfItemsByInvoiceID/{id}")]
+        public IActionResult GetCountOfItemsByInvoiceID(int id)
+        {
+            return Ok(_chinook.GetCountOfItemsByInvoiceID(id));
+        }
     }
 }

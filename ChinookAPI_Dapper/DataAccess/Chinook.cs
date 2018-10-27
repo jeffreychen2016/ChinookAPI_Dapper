@@ -55,5 +55,19 @@ namespace ChinookAPI_Dapper.DataAccess
                 return result.ToList();
             };
         }
+
+        public int GetCountOfItemsByInvoiceID(int id)
+        {
+            using (var dbConnection = new SqlConnection(ConnectionString))
+            {
+                dbConnection.Open();
+                var result = dbConnection.ExecuteScalar(@"SELECT 
+                                            Counts = COUNT(*)
+                                        FROM InvoiceLine
+                                        WHERE InvoiceId = @id", new { id = id });
+ 
+                return (int)result;
+            }
+        }
     }
 }
